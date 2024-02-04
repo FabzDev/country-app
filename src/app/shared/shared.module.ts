@@ -6,25 +6,28 @@ import { AppRoutingModule } from '../app-routing.module';
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { CountriesRotingModule } from '../countries/countries-routing.module';
 
 @NgModule({
   declarations: [
     HomePageComponent,
     AboutPageComponent,
     SidebarComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    SearchBoxComponent
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    CountriesRotingModule,
+
   ],
   exports: [
-    // HomePageComponent,
-    // AboutPageComponent,
-    // ContactPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    SearchBoxComponent
   ],
 
 })
