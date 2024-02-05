@@ -11,8 +11,21 @@ export class CountriesService {
   private apiURL: string = 'https://restcountries.com/v3.1'
 
   searchCapital( term: string ): Observable<Country[]>{
-
     return this.http.get<Country[]>(`${this.apiURL}/capital/${term}`)
+      .pipe(
+        catchError(error => of([]))
+      )
+  }
+
+  searchCountry( term: string ): Observable<Country[]>{
+    return this.http.get<Country[]>(`${this.apiURL}/name/${term}`)
+      .pipe(
+        catchError(error => of([]))
+      )
+  }
+
+  searchRegion( term: string ): Observable<Country[]>{
+    return this.http.get<Country[]>(`${this.apiURL}/region/${term}`)
       .pipe(
         catchError(error => of([]))
       )

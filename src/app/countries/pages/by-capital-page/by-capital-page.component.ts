@@ -16,7 +16,7 @@ export class ByCapitalPageComponent {
 
   public ph: string = 'Buscar por capital'
 
-  byCapitalBoxSearch(capital: string):void {
+  capitalSearch(capital: string):void {
     this.countriesService.searchCapital( capital ).subscribe( countries => {this.countries = countries;})
   }
 
