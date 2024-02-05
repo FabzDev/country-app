@@ -8,6 +8,7 @@ import { ByCountryPageComponent } from './pages/by-country-page/by-country-page.
 import { ByRegionPageComponent } from './pages/by-region-page/by-region-page.component';
 import { CountryPageComponent } from './pages/country-page/country-page.component';
 import { SharedModule } from '../shared/shared.module';
+import { CountriesTableComponent } from './components/countries-table/countries-table.component';
 
 
 
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     ByCountryPageComponent,
     ByRegionPageComponent,
     CountryPageComponent,
+    CountriesTableComponent,
   ],
   imports: [
     CommonModule,
