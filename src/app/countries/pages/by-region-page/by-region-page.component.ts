@@ -16,7 +16,7 @@ export class ByRegionPageComponent {
   public ph: string = 'Buscar por región';
 
   regionSearch(region: string): void {
-    this.countriesService.searchRegion(region).subscribe((countries) => {
+    this.countriesService.searchBy(region, 'region').subscribe((countries) => {
       this.countries = countries;
     });
   }

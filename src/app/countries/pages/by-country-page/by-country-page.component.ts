@@ -16,6 +16,6 @@ export class ByCountryPageComponent {
   public ph: string = 'Buscar por país'
 
   countrySearch(country: string):void {
-    this.countriesService.searchCountry( country ).subscribe( countries => {this.countries = countries;})
+    this.countriesService.searchBy( country, "name" ).subscribe( countries => {this.countries = countries;})
   }
 }
