@@ -15,14 +15,14 @@ export class CountryPageComponent implements OnInit {
   ) {}
 
   private id: string = '';
-  private countries!: Country
+  private country!: Country
 
   ngOnInit(): void {
     this.activedRoute.params
     .subscribe((params) => {
       this.countriesService.searchCountryId(params['id'])
         .subscribe((countries) => {
-          console.log(this.countries = countries[0])
+          console.log(this.country = countries[0])
         })
     });
   }
