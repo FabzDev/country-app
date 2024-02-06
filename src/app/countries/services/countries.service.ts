@@ -14,10 +14,22 @@ export class CountriesService {
     return this.http.get<Country[]>(`${this.apiURL}/${path}/${term}`)
       .pipe(
         catchError(error => of([])),
-        delay(1000)
+        delay(2000)
       )
   }
 
+  searchCountryId( code: string ): Observable<Country | null>{
+    return this.http.get<Country[]>(`${this.apiURL}/alpha/${code}`)
+      .pipe(
+        map(countries => (countries ? countries[0] : null)),
+        catchError(error => of(null))
+      )
+  }
+
+}
+
+
+  // DEPRECATED
   // searchCapital( term: string ): Observable<Country[]>{
   //   return this.http.get<Country[]>(`${this.apiURL}/capital/${term}`)
   //     .pipe(
@@ -38,13 +50,3 @@ export class CountriesService {
   //       catchError(error => of([]))
   //     )
   // }
-
-  searchCountryId( code: string ): Observable<Country | null>{
-    return this.http.get<Country[]>(`${this.apiURL}/alpha/${code}`)
-      .pipe(
-        map(countries => (countries ? countries[0] : null)),
-        catchError(error => of(null))
-      )
-  }
-
-}
