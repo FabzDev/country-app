@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'shared-search-box',
   templateUrl: './search-box.component.html',
   styles: ``
 })
-export class SearchBoxComponent {
+export class SearchBoxComponent implements OnInit{
 
   @Input()
   public placeH: string = ''
@@ -17,5 +18,20 @@ export class SearchBoxComponent {
     this.boxEvent.emit(value)
   }
 
+  // DEBOUNCER
+  private debouncer: Subject<string> = new Subject<string>();
 
+  ngOnInit(): void {
+    this.debouncer
+    .pipe(
+      debounceTime(300)
+    )
+    .subscribe(value => {
+      console.log(value);
+    })
+  }
+
+  onDelayedKey(txtBox: string){
+    this.debouncer.next(txtBox)
+  }
 }

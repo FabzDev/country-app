@@ -1,9 +1,10 @@
+<!-- (keyup.enter)="boxSearch(txtSearchInput.value)" -->
 
 <input
   type="text"
   [placeholder]="placeH"
   class="form-control"
-  (keyup.enter)="boxSearch(txtSearchInput.value)"
+  (keyup)="onDelayedKey(txtSearchInput.value)"
   #txtSearchInput
   >
 
