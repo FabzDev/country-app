@@ -1,13 +1,14 @@
 <h2>Por Capital</h2>
 <hr>
 
+<!-- [ngClass]="actualRegion == region ? 'btn-outline-primary': ''" -->
 <div class="row">
   <div class="col text-center">
-    <button *ngFor="let region of regions"
-      class="btn mx-3"
-      (click)="regionSearch(region)"
-      [ngClass]="actualRegion == region ? 'btn-outline-primary': ''"
-    >
+    <button
+    *ngFor="let region of regions"
+    class="btn mx-3"
+    (click)="regionSearch(region)"
+    [ngClass]="{'btn-outline-primary': region === actualRegion}">
       {{region}}
     </button>
   </div>
