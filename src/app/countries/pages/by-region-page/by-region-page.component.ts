@@ -3,6 +3,8 @@ import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country.interface';
 import { count } from 'rxjs';
 
+type Region = 'Africa' | 'America' | 'Asia' | 'Europe' | 'Oceania';
+
 @Component({
   selector: 'countries-by-region-page',
   templateUrl: './by-region-page.component.html',
@@ -11,13 +13,22 @@ import { count } from 'rxjs';
 export class ByRegionPageComponent {
   constructor(private countriesService: CountriesService) {}
 
+  public regions: Region[] = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+
   public countries: Country[] = [];
+
+  public isLoading: boolean = false;
+
+  public actualRegion?: Region;
 
   public ph: string = 'Buscar por región';
 
-  regionSearch(region: string): void {
+  regionSearch(region: Region): void {
+    this.isLoading = true;
+    this.actualRegion = region;
     this.countriesService.searchBy(region, 'region').subscribe((countries) => {
       this.countries = countries;
+      this.isLoading = false;
     });
   }
 }
