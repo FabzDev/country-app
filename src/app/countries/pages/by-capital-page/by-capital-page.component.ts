@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country.interface';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'countries-by-capital-page',
@@ -10,21 +11,26 @@ import { Country } from '../../interfaces/country.interface';
 export class ByCapitalPageComponent implements OnInit{
   constructor(private countriesService: CountriesService ){}
 
-  ngOnInit(): void {
-  }
-
   public countries: Country[] = []
   public isLoading: boolean = false
+  public textBoxSavedP: string = ''
 
   public ph: string = 'Buscar por capital'
+
+
 
   capitalSearch(capital: string):void {
     this.isLoading = true
     this.countriesService.searchBy( capital, "capital" )
     .subscribe( countries => {
       this.countries = countries;
-      this.isLoading = false
+      this.isLoading = false;
     })
   }
 
+
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheCountries.byCapital.countries
+    this.textBoxSavedP = this.countriesService.cacheCountries.byCapital.searchTerm
+  }
 }
