@@ -10,19 +10,19 @@ import { Country } from '../../interfaces/country.interface';
   styles: ``,
 })
 export class CountryPageComponent implements OnInit {
+  public country?: Country;
+
   constructor(
     private activedRoute: ActivatedRoute,
     private countriesService: CountriesService,
     private router: Router
   ) {}
 
-  public country?: Country;
-
   ngOnInit(): void {
     this.activedRoute.params
       .pipe(switchMap(({ id }) => this.countriesService.searchCountryId(id)))
       .subscribe(country => {
-         country ? this.country = country : this.router.navigateByUrl('')
+         country ? this.country = country : this.router.navigateByUrl('');
         })
   }
   // ngOnInit(): void {

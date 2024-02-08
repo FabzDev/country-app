@@ -12,17 +12,18 @@ import { count } from 'rxjs';
   styles: ``,
 })
 export class ByRegionPageComponent implements OnInit{
-  constructor(private countriesService: CountriesService) {}
-
-  public regions: Region[] = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
-
+  public ph: string = 'Buscar por región';
   public countries: Country[] = [];
-
+  public regions: Region[] = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+  public actualRegion?: Region;
   public isLoading: boolean = false;
 
-  public actualRegion?: Region;
+  constructor(private countriesService: CountriesService) {}
 
-  public ph: string = 'Buscar por región';
+  ngOnInit(): void{
+    this.actualRegion = this.countriesService.cacheCountries.byRegion.searchRegion
+    this.countries = this.countriesService.cacheCountries.byRegion.countries
+  }
 
   regionSearch(region: Region): void {
     this.isLoading = true;
@@ -33,10 +34,5 @@ export class ByRegionPageComponent implements OnInit{
         this.countries = countries;
         this.isLoading = false;
     });
-  }
-
-  ngOnInit(): void{
-    this.actualRegion = this.countriesService.cacheCountries.byRegion.searchRegion
-    this.countries = this.countriesService.cacheCountries.byRegion.countries
   }
 }

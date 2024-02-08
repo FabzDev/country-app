@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CountriesTableComponent {
 
-
   @Input()
-  public countries: Country[] = []
+  public countries: Country[] = [];
 
 }

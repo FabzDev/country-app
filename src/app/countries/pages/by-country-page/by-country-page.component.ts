@@ -8,13 +8,16 @@ import { Country } from '../../interfaces/country.interface';
   styles: ``
 })
 export class ByCountryPageComponent implements OnInit{
+  public countries: Country[] = [];
+  public ph: string = 'Buscar por país';
+  public textBoxSavedP = '';
+
   constructor(private countriesService: CountriesService ){}
 
-  public countries: Country[] = []
-
-  public ph: string = 'Buscar por país'
-
-  public textBoxSavedP = ''
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheCountries.byCountry.countries;
+    this.textBoxSavedP = this.countriesService.cacheCountries.byCountry.searchTerm;
+  }
 
   countrySearch(country: string):void {
     this.countriesService
@@ -22,10 +25,5 @@ export class ByCountryPageComponent implements OnInit{
       .subscribe( countries => {
         this.countries = countries;
       })
-  }
-
-  ngOnInit(): void {
-    this.countries = this.countriesService.cacheCountries.byCountry.countries
-    this.textBoxSavedP = this.countriesService.cacheCountries.byCountry.searchTerm
   }
 }

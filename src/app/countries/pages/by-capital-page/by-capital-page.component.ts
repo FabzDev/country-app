@@ -6,31 +6,29 @@ import { tap } from 'rxjs';
 @Component({
   selector: 'countries-by-capital-page',
   templateUrl: './by-capital-page.component.html',
-  styles: ``
+  styles: ``,
 })
-export class ByCapitalPageComponent implements OnInit{
-  constructor(private countriesService: CountriesService ){}
+export class ByCapitalPageComponent implements OnInit {
+  public countries: Country[] = [];
+  public isLoading: boolean = false;
+  public textBoxSavedP: string = '';
+  public ph: string = 'Buscar por capital';
 
-  public countries: Country[] = []
-  public isLoading: boolean = false
-  public textBoxSavedP: string = ''
-
-  public ph: string = 'Buscar por capital'
-
-
-
-  capitalSearch(capital: string):void {
-    this.isLoading = true
-    this.countriesService.searchBy( capital, "capital" )
-    .subscribe( countries => {
-      this.countries = countries;
-      this.isLoading = false;
-    })
-  }
-
+  constructor(private countriesService: CountriesService) {}
 
   ngOnInit(): void {
-    this.countries = this.countriesService.cacheCountries.byCapital.countries
-    this.textBoxSavedP = this.countriesService.cacheCountries.byCapital.searchTerm
+    this.countries = this.countriesService.cacheCountries.byCapital.countries;
+    this.textBoxSavedP =
+      this.countriesService.cacheCountries.byCapital.searchTerm;
+  }
+
+  capitalSearch(capital: string): void {
+    this.isLoading = true;
+    this.countriesService
+      .searchBy(capital, 'capital')
+      .subscribe((countries) => {
+        this.countries = countries;
+        this.isLoading = false;
+      });
   }
 }
