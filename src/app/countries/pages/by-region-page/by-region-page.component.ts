@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country.interface';
 import { Region } from '../../interfaces/region.type';
@@ -11,7 +11,7 @@ import { count } from 'rxjs';
   templateUrl: './by-region-page.component.html',
   styles: ``,
 })
-export class ByRegionPageComponent {
+export class ByRegionPageComponent implements OnInit{
   constructor(private countriesService: CountriesService) {}
 
   public regions: Region[] = ['Africa', 'America', 'Asia', 'Europe', 'Oceania'];
@@ -27,9 +27,16 @@ export class ByRegionPageComponent {
   regionSearch(region: Region): void {
     this.isLoading = true;
     this.actualRegion = region;
-    this.countriesService.searchBy(region, 'region').subscribe((countries) => {
-      this.countries = countries;
-      this.isLoading = false;
+    this.countriesService.searchBy(region, 'region')
+      .subscribe((countries) => {
+        this.actualRegion = this.countriesService.cacheCountries.byRegion.searchRegion
+        this.countries = countries;
+        this.isLoading = false;
     });
+  }
+
+  ngOnInit(): void{
+    this.actualRegion = this.countriesService.cacheCountries.byRegion.searchRegion
+    this.countries = this.countriesService.cacheCountries.byRegion.countries
   }
 }
