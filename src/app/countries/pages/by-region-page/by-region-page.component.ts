@@ -30,7 +30,6 @@ export class ByRegionPageComponent implements OnInit{
     this.actualRegion = region;
     this.countriesService.searchBy(region, 'region')
       .subscribe((countries) => {
-        this.actualRegion = this.countriesService.cacheCountries.byRegion.searchRegion
         this.countries = countries;
         this.isLoading = false;
     });
